@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'rest_framework.authtoken',
     'djoser',
-    'authtok.apps.AuthtokConfig',
+    'api.apps.ApiConfig',
     'recipes.apps.RecipesConfig',
     'users.apps.UsersConfig',
 
@@ -136,7 +137,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 # REST_FRAMEWORK
 # https://www.django-rest-framework.org/#requirements
@@ -151,8 +152,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPaginator',
     'PAGE_SIZE': 6,
+    'SEARCH_PARAM': 'name',
 }
 
 
@@ -173,8 +175,12 @@ DJOSER = {
 
     'SERIALIZERS':
         {
-            'user': 'users.serializers.UserSerializer',
-            'current_user': 'users.serializers.UserSerializer',
-            'user_create': 'users.serializers.UserCreateSerializer',
+            'user': 'api.serializers.CustomUserSerializer',
+            'current_user': 'api.serializers.CustomUserSerializer',
+            'user_create': 'api.serializers.CustomUserCreateSerializer',
         },
 }
+
+
+# Название скачиваемого файла корзины
+FILE_NAME = 'shopping_cart.txt'

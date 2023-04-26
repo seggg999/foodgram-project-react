@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AuthtokConfig(AppConfig):
+class ApiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'authtok'
+    name = 'api'

@@ -4,18 +4,34 @@ from .models import (Tag, Ingredient, Recipe, Favorite, Amount,
                      Shopping_cart, TagInRecipe, IngredientInRecipe)
 
 
+class IngredientInRecipeInline(admin.StackedInline):
+    model = IngredientInRecipe
+    list_display = (
+        'recipe',
+        )
+
+
+class TagInRecipeInline(admin.StackedInline):
+    model = TagInRecipe
+    list_display = (
+        'tag',
+    )
+
+
 class RecipeAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'author',
         'name',
-        'image',
-        'text',
-        'cooking_time',
     )
-    search_fields = ('name',)
-    list_filter = ('name',)
+    readonly_fields = ('in_favorites',)
+    inlines = [IngredientInRecipeInline, TagInRecipeInline]
+    list_filter = ('author', 'name', 'tags',)
     empty_value_display = '-пусто-'
+
+    @admin.display(description='В избранном')
+    def in_favorites(self, obj):
+        return obj.favorit_recipe.count()
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -25,8 +41,6 @@ class TagAdmin(admin.ModelAdmin):
         'color',
         'slug',
     )
-    search_fields = ('name',)
-    list_filter = ('name',)
     empty_value_display = '-пусто-'
 
 
@@ -36,7 +50,6 @@ class IngredientAdmin(admin.ModelAdmin):
         'name',
         'measurement_unit',
     )
-    search_fields = ('name',)
     list_filter = ('name',)
     empty_value_display = '-пусто-'
 
@@ -69,26 +82,20 @@ class TagInRecipeAdmin(admin.ModelAdmin):
         'recipe',
         'tag',
     )
-    search_fields = ('recipe',)
-    list_filter = ('recipe',)
     empty_value_display = '-пусто-'
 
 
 class IngredientInRecipeAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
         'recipe',
         'ingredient',
     )
-    search_fields = ('recipe',)
-    list_filter = ('recipe',)
     empty_value_display = '-пусто-'
 
 
 class AmountAdmin(admin.ModelAdmin):
     list_display = (
         'id',
- #       'recipe',
         'ingredient',
         'amount',
     )
@@ -97,11 +104,11 @@ class AmountAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(TagInRecipe, TagInRecipeAdmin)
 admin.site.register(Ingredient, IngredientAdmin)
+admin.site.register(IngredientInRecipe, IngredientInRecipeAdmin)
+admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Shopping_cart, Shopping_cartAdmin)
-admin.site.register(TagInRecipe, TagInRecipeAdmin)
-admin.site.register(IngredientInRecipe, IngredientInRecipeAdmin)
 admin.site.register(Amount, AmountAdmin)
