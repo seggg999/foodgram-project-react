@@ -118,13 +118,15 @@ class Recipe(models.Model):
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Список тегов',
-        through='TagInRecipe'
+        through='TagInRecipe',
+        db_index=True
     )
     author = models.ForeignKey(
         User,
         verbose_name='Автор рецепта',
         related_name='author',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        db_index=True
     )
     ingredients = models.ManyToManyField(
         Amount,
@@ -133,16 +135,14 @@ class Recipe(models.Model):
     )
     name = models.CharField(
         verbose_name='Название',
-        max_length=200
-    )
-    image = models.URLField(
-        verbose_name='Картинка',
+        max_length=200,
+        db_index=True
     )
     image = models.ImageField(
         verbose_name='Картинка',
         upload_to='recipes/images/',
         )
-    text = models.CharField(
+    text = models.TextField(
         verbose_name='Описание',
         max_length=200
     )

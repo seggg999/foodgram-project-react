@@ -1,5 +1,4 @@
 from django.db import models
-#from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
 
@@ -10,9 +9,6 @@ class User(AbstractUser):
         ordering = ['id']
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-
-    #USERNAME_FIELD = 'email'
- #   REQUIRED_FIELDS = ('email', 'first_name', 'last_name')
 
     def __str__(self):
         return self.username
