@@ -3,7 +3,7 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
 from recipes.models import (Amount, Favorite, Ingredient, IngredientInRecipe,
-                            Recipe, Shopping_cart, Tag, TagInRecipe)
+                            Recipe, Shoppingcart, Tag, TagInRecipe)
 from users.models import Subscription
 
 from .field import Base64ImageField
@@ -175,9 +175,8 @@ class RecipeSerializer(serializers.ModelSerializer):
         '''Рецепт находится ли в корзине.
         '''
         user_id = self.context['request'].user.id
-        return Shopping_cart.objects.filter(recipe=obj.id,
-                                            user=user_id,
-                                            ).exists()
+        return Shoppingcart.objects.filter(
+            recipe=obj.id, user=user_id).exists()
 
 
 class CreatRecipeSerializer(RecipeSerializer):
