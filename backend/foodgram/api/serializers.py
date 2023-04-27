@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
-
 from recipes.models import (Amount, Favorite, Ingredient, IngredientInRecipe,
                             Recipe, Shoppingcart, Tag, TagInRecipe)
 from users.models import Subscription

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Amount, Favorite, Ingredient, IngredientInRecipe, Recipe,
-                     Shopping_cart, Tag, TagInRecipe)
+                     Shoppingcart, Tag, TagInRecipe)
 
 
 class IngredientInRecipeInline(admin.StackedInline):
@@ -110,5 +110,5 @@ admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientInRecipe, IngredientInRecipeAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
-admin.site.register(Shopping_cart, ShoppingcartAdmin)
+admin.site.register(Shoppingcart, ShoppingcartAdmin)
 admin.site.register(Amount, AmountAdmin)
