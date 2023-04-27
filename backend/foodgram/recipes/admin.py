@@ -1,14 +1,14 @@
 from django.contrib import admin
 
-from .models import (Tag, Ingredient, Recipe, Favorite, Amount,
-                     Shopping_cart, TagInRecipe, IngredientInRecipe)
+from .models import (Amount, Favorite, Ingredient, IngredientInRecipe, Recipe,
+                     Shopping_cart, Tag, TagInRecipe)
 
 
 class IngredientInRecipeInline(admin.StackedInline):
     model = IngredientInRecipe
     list_display = (
         'recipe',
-        )
+    )
 
 
 class TagInRecipeInline(admin.StackedInline):
@@ -65,7 +65,7 @@ class FavoriteAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-class Shopping_cartAdmin(admin.ModelAdmin):
+class ShoppingcartAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'recipe',
@@ -110,5 +110,5 @@ admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(IngredientInRecipe, IngredientInRecipeAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
-admin.site.register(Shopping_cart, Shopping_cartAdmin)
+admin.site.register(Shopping_cart, ShoppingcartAdmin)
 admin.site.register(Amount, AmountAdmin)

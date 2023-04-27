@@ -10,7 +10,6 @@ class Command(BaseCommand):
     help = 'Добавляет данные из файлa ingredients.csv в таблицу Ingredient'
 
     def handle(self, *args, **options):
-        # Ingredient
         print('\nCreating Ingredient list')
         with open(
             f'{settings.BASE_DIR}/static/data/ingredients.csv',
@@ -24,6 +23,5 @@ class Command(BaseCommand):
                 print(row['name'], ',', row['measurement_unit'])
                 Ingredient.objects.get_or_create(
                     name=row['name'],
-                    measurement_unit=row['measurement_unit']
-                    )
+                    measurement_unit=row['measurement_unit'])
             print(' -List created\nDone')

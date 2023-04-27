@@ -1,11 +1,10 @@
 # https://docs.djangoproject.com/en/2.2/ref/models/fields/#field-types
 
-from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, RegexValidator
+from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-
 
 User = get_user_model()
 
@@ -141,7 +140,7 @@ class Recipe(models.Model):
     image = models.ImageField(
         verbose_name='Картинка',
         upload_to='recipes/images/',
-        )
+    )
     text = models.TextField(
         verbose_name='Описание',
         max_length=200
@@ -201,7 +200,7 @@ class Favorite(models.Model):
         return f'{self.user} {self.recipe}'
 
 
-class Shopping_cart(models.Model):
+class Shoppingcart(models.Model):
     '''Список покупок:
     recipe - Рецепт
     user   - Пользователь добавил рецепт в корзину.

@@ -1,14 +1,12 @@
 from django.contrib.auth import get_user_model
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from rest_framework import serializers
 
-from djoser.serializers import UserSerializer, UserCreateSerializer
+from recipes.models import (Amount, Favorite, Ingredient, IngredientInRecipe,
+                            Recipe, Shopping_cart, Tag, TagInRecipe)
+from users.models import Subscription
 
 from .field import Base64ImageField
-from users.models import Subscription
-from recipes.models import (Tag, Ingredient, Recipe, Favorite, Shopping_cart,
-                            Amount, TagInRecipe, IngredientInRecipe
-                            )
-
 
 User = get_user_model()
 
@@ -61,8 +59,7 @@ class UserWithRecipesSerializer(serializers.ModelSerializer):
     def validate(self, obj):
         if (self.context['request'].user == obj):
             raise serializers.ValidationError(
-                {'errors': 'Нельзя подписаться на себя.'}
-                )
+                {'errors': 'Нельзя подписаться на себя.'})
         return obj
 
     def get_is_subscribed(self, obj):
@@ -76,9 +73,7 @@ class UserWithRecipesSerializer(serializers.ModelSerializer):
     def get_recipes_count(self, obj):
         '''Общее количество рецептов пользователя.
         '''
-        recipes_count = Recipe.objects.filter(id=obj.id
-                                              ).count()
-        return recipes_count
+        return Recipe.objects.filter(id=obj.id).count()
 
     def get_recipes(self, obj):
         '''Рецепты с огранечением выдачи.
@@ -145,8 +140,7 @@ class IngredientAmountSerializer(serializers.ModelSerializer):
                                         )
 
     measurement_unit = serializers.SlugRelatedField(
-        source='ingredient', slug_field='measurement_unit', read_only='True'
-        )
+        source='ingredient', slug_field='measurement_unit', read_only='True')
 
     class Meta:
         model = Amount
@@ -205,9 +199,7 @@ class CreatRecipeSerializer(RecipeSerializer):
                                        )
         for ingredient in ingredients:
             current_amount = Amount.objects.create(
-                                          amount=ingredient['amount'],
-                                          ingredient=ingredient['id']
-                                          )
+                amount=ingredient['amount'], ingredient=ingredient['id'])
             IngredientInRecipe.objects.create(recipe=recipe,
                                               ingredient=current_amount
                                               )
