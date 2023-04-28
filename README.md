@@ -134,7 +134,7 @@
 #### IP адрес проекта
 #### 158.160.34.36
    `
-   name: sega                                                                                                                              
+   name: sega                                                                                                                          
    `
    email: sega@ss.ss                                                                                                     
    `
