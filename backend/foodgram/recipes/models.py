@@ -78,7 +78,6 @@ class Ingredient(models.Model):
 class Amount(models.Model):
     '''Содержание ингредиента в рецепте:
     amoun      - Колличество ингредиента;
-#   recipe     - Рецепт;
     ingredient - Ингредиент;
     amount     - Колличество ингредиента.
     '''
