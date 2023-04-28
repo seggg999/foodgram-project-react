@@ -129,19 +129,20 @@
     Для этого выполните команду:
     `
     docker-compose exec web python manage.py csv_to_db
- 
-#### Автор:
 
-Сергей Долгов
 
 #### IP адрес проекта
 #### 158.160.34.36
    `
-   name: sega
+   name: sega                                                                 
    `
-   email: sega@ss.ss
+   email: sega@ss.ss                                                        
    `
-   pass: 12345
+   pass: 12345                                                             
    `
+   
+#### Автор:
+
+Сергей Долгов
 
 ![example event parameter](https://github.com/seggg999/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg?event=push)
