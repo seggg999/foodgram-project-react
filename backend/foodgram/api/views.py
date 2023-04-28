@@ -160,9 +160,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
             .values_list('ingredient__name', 'total_amount',
                          'ingredient__measurement_unit')
         )
-        file_list = ['Список покупок:\n']
+        file_list = ['Список покупок:\r\n']
         [file_list.append(
-            '{} - {} {}.\n'.format(*ingredient)) for ingredient in ingredients]
+            '{} - {} {}.\r\n'.format(*ingredient)) for ingredient in ingredients]
         response = HttpResponse(file_list, content_type='text/plain')
         response['Content-Disposition'] = f'attachment; filename={FILE_NAME}'
         return response
