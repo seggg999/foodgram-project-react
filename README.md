@@ -138,7 +138,9 @@
 #### 158.160.34.36
    `
    name: sega
+   `
    email: sega@ss.ss
+   `
    pass: 12345
    `
 
