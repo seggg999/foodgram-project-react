@@ -54,7 +54,7 @@
     В интерфейс админ-зоны выведены необходимые поля моделей и их фильтры.
     Этот интерфейс доступен по адресу: http://158.160.34.36/admin/
 
-##Техническая инфраструктура проекта:
+ ## Техническая инфраструктура проекта:
     Проект написан на Python 3.7
     Проект использует базу данных PostgreSQL.
     Используемые в проекте технологиитехнологии: Django, Django_rest_framework, Docker, Gunicorn, NGINX.
@@ -130,16 +130,16 @@
     `
     docker-compose exec web python manage.py csv_to_db
  
-### Автор:
+#### Автор:
 
 Сергей Долгов
 
-### IP адрес проекта
-    158.160.34.36
-
+#### IP адрес проекта
+#### 158.160.34.36
+   `
    name: sega
    email: sega@ss.ss
    pass: 12345
-
+   `
 
 ![example event parameter](https://github.com/seggg999/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg?event=push)
