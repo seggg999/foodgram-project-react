@@ -11,12 +11,10 @@ User = get_user_model()
 
 class Tag(models.Model):
     '''Тэги:
-    id     - Уникальный id;
     name   - Название;
     color  - Цвет в HEX;
     slug   - Уникальный слаг.
     '''
-    id = models.AutoField(primary_key=True)
     name = models.CharField(
         verbose_name='Тэг',
         max_length=200,
@@ -51,11 +49,9 @@ class Tag(models.Model):
 
 class Ingredient(models.Model):
     '''Ингредиенты:
-    id               - Уникальный id;
     name             - Название ингредиента;
     measurement_unit - Единица измерения ингредиента.
     '''
-    id = models.AutoField(primary_key=True)
     name = models.CharField(
         verbose_name='Ингредиент',
         max_length=200,
@@ -75,9 +71,9 @@ class Ingredient(models.Model):
         return self.name
 
 
-class Amount(models.Model):
+class AmountOfIngredient(models.Model):
     '''Содержание ингредиента в рецепте:
-    amoun      - Колличество ингредиента;
+    amount     - Колличество ингредиента;
     ingredient - Ингредиент;
     amount     - Колличество ингредиента.
     '''
@@ -87,7 +83,8 @@ class Amount(models.Model):
         on_delete=models.CASCADE,
     )
     amount = models.PositiveIntegerField(
-        verbose_name='Колличество ингредиента'
+        verbose_name='Колличество ингредиента',
+        validators=[MinValueValidator(1)]
     )
 
     class Meta:
@@ -101,7 +98,6 @@ class Amount(models.Model):
 
 class Recipe(models.Model):
     '''Рецепты:
-    id             - Уникальный id;
     tags           - Список тегов;
     author         - Автор рецепта;
     ingredients    - Список ингредиентов;
@@ -112,7 +108,6 @@ class Recipe(models.Model):
     text           - Описание;
     cooking_time   - Время приготовления (в минутах).
     '''
-    id = models.AutoField(primary_key=True)
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Список тегов',
@@ -127,7 +122,7 @@ class Recipe(models.Model):
         db_index=True
     )
     ingredients = models.ManyToManyField(
-        Amount,
+        AmountOfIngredient,
         verbose_name='Список ингредиентов',
         through='IngredientInRecipe'
     )
@@ -275,7 +270,7 @@ class IngredientInRecipe(models.Model):
         related_name='recipe_in'
     )
     ingredient = models.OneToOneField(
-        Amount,
+        AmountOfIngredient,
         verbose_name='Ингредиент',
         on_delete=models.CASCADE,
         related_name='ingredient_in'

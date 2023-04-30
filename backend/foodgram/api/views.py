@@ -11,13 +11,13 @@ from rest_framework.response import Response
 from users.models import Subscription
 
 from foodgram.settings import FILE_NAME
-from recipes.models import (Amount, Favorite, Ingredient, IngredientInRecipe,
-                            Recipe, Shoppingcart, Tag)
+from recipes.models import (AmountOfIngredient, Favorite, Ingredient,
+                            IngredientInRecipe, Recipe, Shoppingcart, Tag)
 
 from .filters import RecipeFilter
 from .pagination import CustomPaginator
 from .permissions import IsAutherOrReadOnly
-from .serializers import (CreatRecipeSerializer, IngredientSerializer,
+from .serializers import (CreateRecipeSerializer, IngredientSerializer,
                           RecipeMinifiedSerializer, RecipeSerializer,
                           TagSerializer, UserWithRecipesSerializer)
 
@@ -130,9 +130,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.request.method == "POST":
-            return CreatRecipeSerializer
+            return CreateRecipeSerializer
         if self.request.method == "PATCH":
-            return CreatRecipeSerializer
+            return CreateRecipeSerializer
         return self.serializer_class
 
     def perform_create(self, serializer):
@@ -154,7 +154,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             .values_list('ingredient', flat=True)
         )
         ingredients = (
-            Amount.objects.filter(id__in=ingredients_list)
+            AmountOfIngredient.objects.filter(id__in=ingredients_list)
             .values('ingredient')
             .annotate(total_amount=Sum('amount'))
             .values_list('ingredient__name', 'total_amount',
