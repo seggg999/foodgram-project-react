@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from recipes.models import (AmountOfIngredient, Favorite, Ingredient, Recipe,
+                            Shoppingcart, Tag)
 from rest_framework import serializers
-from recipes.models import (AmountOfIngredient, Favorite, Ingredient,
-                            Recipe, Shoppingcart, Tag)
 from users.models import Subscription
 
 from .field import Base64ImageField
