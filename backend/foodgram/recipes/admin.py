@@ -24,6 +24,7 @@ class RecipeAdmin(admin.ModelAdmin):
         'id',
         'author',
         'name',
+        'in_favorites'
     )
     readonly_fields = ('in_favorites',)
     inlines = [IngredientInRecipeInline, TagInRecipeInline]
