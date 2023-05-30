@@ -130,18 +130,6 @@
     `
     docker-compose exec web python manage.py csv_to_db
 
-
-#### IP адрес проекта
-#### 158.160.34.36
-   `
-   name: sega                                                                                                                   
-   `
-   `
-   email: sega@ss.ss                                                                                                           
-   `
-   `
-   pass: 12345                                                                                                                                         
-   `
    
 #### Автор backend части:
 
